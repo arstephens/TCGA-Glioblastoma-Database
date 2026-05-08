@@ -1,6 +1,6 @@
 # SQL Files
 
-This folder contains the SQL-related files used for the TCGA Glioblastoma database project.
+This folder contains the SQL-related files used for the TCGA Glioblastoma database project. These files are used to create the MySQL schema, populate the database, document the finished database export, and support the Neo4j component of the project.
 
 ## Files included in this folder
 
@@ -28,7 +28,7 @@ The script creates the following tables:
 
 This file contains the Neo4j/Cypher code used to load the SQL-derived differentially expressed genes into Neo4j. The graph represents genes as `Gene` nodes and GBM expression subtypes as `Subtype` nodes. Genes are connected to the subtype where they show higher mean expression using a `HIGHER_IN` relationship.
 
-## Large SQL file stored externally
+## Large SQL population file stored externally
 
 The population SQL file was too large to upload directly to GitHub because it contains millions of insert rows.
 
@@ -40,7 +40,21 @@ This script populates the MySQL database using the cleaned datasets and long-for
 
 Access the large population SQL file here:
 
-https://drive.google.com/file/d/1g_XJOyMmzJsOU5L8GDXTW5Ra1TGARh03/view?usp=drive_link
+[Download `04_populate_tcga_gbm_tables.sql`](https://drive.google.com/file/d/1g_XJOyMmzJsOU5L8GDXTW5Ra1TGARh03/view?usp=drive_link)
+
+## SQL dump / finished database export
+
+The full SQL dump of the completed database is also stored externally because it is too large to upload directly to GitHub.
+
+The file is:
+
+- `database_dump.sql`
+
+This dump serves as an export of the finished populated database. It can be used as a backup or as an alternative way to recreate the completed MySQL database.
+
+Access the SQL dump here:
+
+[Download `database_dump.sql`](https://drive.google.com/file/d/10KtBYx5anlFgvVbz-ke4Yjyatf1hzlBV/view?usp=drive_link)
 
 ## Expected final row counts
 
