@@ -325,6 +325,12 @@ The repository still includes:
 
 This structure keeps the project reproducible without making the GitHub repository difficult to use.
 
+## Use of AI Assistance
+
+ChatGPT was used as a support tool during parts of the dataset cleaning, database design, SQL generation, and documentation process. All final decisions about the database structure, cleaned files, SQL scripts, and project documentation were reviewed and implemented as part of this project.
+
+A link to the ChatGPT conversation used during development is included in `docs/project_writeup.pdf`.
+
 ## Project Status
 
 The MySQL database was successfully created and populated in phpMyAdmin. The final populated database contains 13 tables and 3,340,503 total rows. The Neo4j graph component was also created successfully using SQL-derived differential expression results.
