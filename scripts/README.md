@@ -60,6 +60,7 @@ The Neo4j graph represents:
 
 ```text
 (:Gene)-[:HIGHER_IN]->(:Subtype)
+```
 
 ## Neo4j Graph Details
 
