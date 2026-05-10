@@ -8,7 +8,7 @@ This folder contains the diagrams and visual outputs used to document the TCGA G
 
 This diagram shows the normalized database design used for the final MySQL database.
 
-It includes the main entities/tables, primary keys, foreign keys, and relationships between tables. The model separates patient, sample, gene, mutation, expression, copy-number, protein, and sequencing panel information into related tables.
+It includes the main entities/tables, primary keys, foreign keys, and relationships between tables. The model separates patient, sample, gene, mutation, expression, copy number, protein, and sequencing panel information into related tables.
 
 ---
 
@@ -16,13 +16,13 @@ It includes the main entities/tables, primary keys, foreign keys, and relationsh
 
 This image shows the final table structure as displayed in phpMyAdmin Designer after the tables were created and populated.
 
-It is included to show how the schema was implemented in MySQL, including the final table names, fields, primary keys, and foreign-key connections. This view provides a database-level confirmation that the SQL schema matches the intended relational design.
+It is included to show how the schema was implemented in MySQL, including the final table names, fields, primary keys, and foreign key connections. This view provides a database level confirmation that the SQL schema matches the intended relational design.
 
 ---
 
 ### `Neo4j_diff_expressed_genes.png`
 
-This image shows the Neo4j graph visualization created from SQL-derived candidate differentially expressed genes.
+This image shows the Neo4j graph visualization created from SQL gotten candidate differentially expressed genes.
 
 The graph structure is:
 
