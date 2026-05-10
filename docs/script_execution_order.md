@@ -2,8 +2,6 @@
 
 This document explains the order used to recreate the TCGA Glioblastoma MySQL database and Neo4j graph component.
 
-The goal is for another person to be able to follow the workflow from the downloaded data files to the final populated database without guessing the order of scripts or SQL files.
-
 ---
 
 ## Step 1: Download the Data
@@ -15,7 +13,7 @@ Download the raw and cleaned datasets from the external links provided in:
 
 Place the files into the expected local project folders before running the Python scripts.
 
-The raw datasets are the original TCGA GBM files, while the cleaned datasets are the project-specific versions used for database loading.
+The raw datasets are the original TCGA GBM files, while the cleaned datasets are the project specific versions used for database loading.
 
 ---
 
@@ -55,9 +53,9 @@ Run:
 python "scripts/02_Converting Matrix to Long Format.py"
 ```
 
-This converts the cleaned mRNA expression and copy-number alteration matrix files into long format.
+This converts the cleaned mRNA expression and copy number alteration matrix files into long format.
 
-The original mRNA and CNA files are matrix-style files, where genes are rows and samples are columns. The final MySQL database stores these values as one row per sample-gene pair, so the files need to be reshaped before loading.
+The original mRNA and CNA files are matrix style files, where genes are rows and samples are columns. The final MySQL database stores these values as one row per sample gene pair, so the files need to be reshaped before loading.
 
 Expected outputs:
 
@@ -159,7 +157,7 @@ A successful load should match these counts.
 
 ## Step 7: Load the Neo4j Component
 
-The Neo4j portion of this project uses SQL-derived differential expression results from the MySQL database.
+The Neo4j portion of this project uses SQL gotten differential expression results from the MySQL database.
 
 Each `Gene` node represents a candidate differentially expressed gene. Each `Subtype` node represents a GBM expression subtype, either Classical or Proneural. Each `HIGHER_IN` relationship connects a gene to the subtype where it had higher mean expression.
 
