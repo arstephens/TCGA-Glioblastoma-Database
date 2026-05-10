@@ -16,6 +16,6 @@ The cleaned data includes:
 - long format mRNA expression file
 - long format copy-number file
 
-These cleaned files were generated from the raw TCGA GBM datasets using ChatGPT. The link to the cleaning process ChatGPT used is in the project writup. These files were used to create the final MySQL database tables.
+These cleaned files were generated from the raw TCGA GBM datasets using ChatGPT. The link to the cleaning process ChatGPT used is in the project writeup. These files were used to create the final MySQL database tables.
 
 The long format mRNA and copy number files were used to populate the normalized `mrna_expression` and `copy_number` tables in the final relational database.
