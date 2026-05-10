@@ -6,18 +6,18 @@ This data dictionary describes the final MySQL tables created for the TCGA Gliob
 
 | Table | Description |
 |---|---|
-| `patient` | Stores patient-level demographic information. |
+| `patient` | Stores patient level demographic information. |
 | `cancer_type` | Stores broad and detailed cancer type information. |
-| `sample` | Stores sample-level clinical and molecular subtype information. |
+| `sample` | Stores sample level clinical and molecular subtype information. |
 | `gene` | Stores gene identifiers and gene annotation fields. |
-| `mutation` | Stores mutation-level information. |
+| `mutation` | Stores mutation level information. |
 | `mutation_sample` | Bridge table connecting mutations to samples. |
 | `mutation_gene` | Bridge table connecting mutations to genes. |
-| `mrna_expression` | Stores long-format mRNA expression values by sample and gene. |
-| `copy_number` | Stores long-format copy-number alteration values by sample and gene. |
+| `mrna_expression` | Stores long format mRNA expression values by sample and gene. |
+| `copy_number` | Stores long format copy number alteration values by sample and gene. |
 | `protein` | Stores protein identifiers and their associated genes. |
 | `protein_quant` | Stores RPPA protein expression values by sample and protein. |
-| `protein_mutation` | Connects protein records to mutations and stores protein-change annotations. |
+| `protein_mutation` | Connects protein records to mutations and stores protein change annotations. |
 | `sequencing_panel` | Stores mutation and GISTIC/CNA panel information for each sample. |
 
 ---
@@ -72,23 +72,23 @@ The `sample` table stores one row per TCGA sample and connects each sample to a 
 
 # `gene`
 
-The `gene` table stores gene-level identifiers and annotation fields.
+The `gene` table stores gene level identifiers and annotation fields.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
 | `gene_id` | `INT` | Primary Key | Internal numeric identifier for each gene. |
 | `hugo_symbol` | `VARCHAR(30)` |  | HUGO gene symbol. |
-| `entrez_gene_id` | `INT` |  | Entrez Gene identifier, when available. |
+| `entrez_gene_id` | `INT` |  | Entrez Gene identifier. |
 | `chromosome` | `VARCHAR(5)` |  | Chromosome where the gene is located. |
-| `gene_start_position` | `BIGINT` |  | Gene start position, when available. |
-| `gene_end_position` | `BIGINT` |  | Gene end position, when available. |
-| `cytoband` | `VARCHAR(30)` |  | Cytoband annotation, when available. |
+| `gene_start_position` | `BIGINT` |  | Gene start position. |
+| `gene_end_position` | `BIGINT` |  | Gene end position. |
+| `cytoband` | `VARCHAR(30)` |  | Cytoband annotation. |
 
 ---
 
 # `mutation`
 
-The `mutation` table stores mutation-level details. Sample and gene relationships are stored separately in bridge tables.
+The `mutation` table stores mutation level details. Sample and gene relationships are stored separately in bridge tables.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
@@ -106,11 +106,11 @@ The `mutation` table stores mutation-level details. Sample and gene relationship
 
 # `mutation_sample`
 
-The `mutation_sample` table is a bridge table connecting mutations to samples. This was used because the same mutation record may need to be connected to sample-level information without storing `sample_id` directly in the `mutation` table.
+The `mutation_sample` table is a bridge table connecting mutations to samples. This was used because the same mutation record may need to be connected to sample level information without storing `sample_id` directly in the `mutation` table.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
-| `mutation_sample_id` | `BIGINT` | Primary Key | Internal identifier for each mutation-sample relationship. |
+| `mutation_sample_id` | `BIGINT` | Primary Key | Internal identifier for each mutation sample relationship. |
 | `mutation_id` | `INT` | Foreign Key | Links to the `mutation` table. |
 | `sample_id` | `VARCHAR(20)` | Foreign Key | Links to the `sample` table. |
 
@@ -122,7 +122,7 @@ The `mutation_gene` table is a bridge table connecting mutations to genes.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
-| `mutation_gene_id` | `BIGINT` | Primary Key | Internal identifier for each mutation-gene relationship. |
+| `mutation_gene_id` | `BIGINT` | Primary Key | Internal identifier for each mutation gene relationship. |
 | `mutation_id` | `INT` | Foreign Key | Links to the `mutation` table. |
 | `gene_id` | `INT` | Foreign Key | Links to the `gene` table. |
 
@@ -130,7 +130,7 @@ The `mutation_gene` table is a bridge table connecting mutations to genes.
 
 # `mrna_expression`
 
-The `mrna_expression` table stores long-format mRNA expression data. Each row represents one expression value for one sample-gene pair.
+The `mrna_expression` table stores long format mRNA expression data. Each row represents one expression value for one sample gene pair.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
@@ -143,16 +143,14 @@ The `mrna_expression` table stores long-format mRNA expression data. Each row re
 
 # `copy_number`
 
-The `copy_number` table stores long-format copy-number alteration data. Each row represents one copy-number value for one sample-gene pair.
-
-The final design uses `gene_id` instead of `mutation_id` because the CNA dataset is gene-based, not mutation-based.
+The `copy_number` table stores long format copy number alteration data. Each row represents one copy number value for one sample gene pair.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
-| `cna_id` | `BIGINT` | Primary Key | Internal identifier for each copy-number record. |
-| `sample_id` | `VARCHAR(20)` | Foreign Key | Links the copy-number value to a sample. |
-| `gene_id` | `INT` | Foreign Key | Links the copy-number value to a gene. |
-| `copy_number_value` | `INT` |  | Copy-number alteration value. |
+| `cna_id` | `BIGINT` | Primary Key | Internal identifier for each copy number record. |
+| `sample_id` | `VARCHAR(20)` | Foreign Key | Links the copy number value to a sample. |
+| `gene_id` | `INT` | Foreign Key | Links the copy number value to a gene. |
+| `copy_number_value` | `INT` |  | Copy number alteration value. |
 
 ---
 
@@ -170,7 +168,7 @@ The `protein` table stores protein records and links each protein to a gene.
 
 # `protein_quant`
 
-The `protein_quant` table stores RPPA protein expression values. Each row represents one protein expression value for one sample-protein pair.
+The `protein_quant` table stores RPPA protein expression values. Each row represents one protein expression value for one sample protein pair.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
@@ -183,14 +181,14 @@ The `protein_quant` table stores RPPA protein expression values. Each row repres
 
 # `protein_mutation`
 
-The `protein_mutation` table connects proteins to mutations and stores protein-level change information.
+The `protein_mutation` table connects proteins to mutations and stores protein level change information.
 
 | Column | Data Type | Key | Description |
 |---|---|---|---|
-| `protein_mutation_id` | `BIGINT` | Primary Key | Internal identifier for each protein-mutation relationship. |
+| `protein_mutation_id` | `BIGINT` | Primary Key | Internal identifier for each protein mutation relationship. |
 | `protein_id` | `INT` | Foreign Key | Links to the `protein` table. |
 | `mutation_id` | `INT` | Foreign Key | Links to the `mutation` table. |
-| `protein_change` | `VARCHAR(255)` |  | Protein-level mutation/change annotation. |
+| `protein_change` | `VARCHAR(255)` |  | Protein level mutation/change annotation. |
 
 ---
 
@@ -212,7 +210,7 @@ The Neo4j component uses the file:
 
 - `neo4j/differentially_expressed_genes.csv`
 
-This file contains SQL-derived candidate differentially expressed genes comparing Classical and Proneural GBM samples.
+This file contains SQL gotten candidate differentially expressed genes comparing Classical and Proneural GBM samples.
 
 ## Neo4j Node and Relationship Types
 
