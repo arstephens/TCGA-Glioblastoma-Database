@@ -8,16 +8,16 @@ The scripts are numbered in the order they should be used.
 
 ### `02_Converting Matrix to Long Format.py`
 
-This script converts the mRNA expression and copy-number alteration matrix files into long format.
+This script converts the mRNA expression and copy number alteration matrix files into long format.
 
-The original mRNA and CNA files were structured as matrices, with genes as rows and TCGA samples as columns. Since the final MySQL database stores expression and copy-number values as one row per sample-gene pair, these files had to be reshaped before loading.
+The original mRNA and CNA files were structured as matrices, with genes as rows and TCGA samples as columns. Since the final MySQL database stores expression and copy number values as one row per sample gene pair, these files had to be reshaped before loading.
 
 Expected outputs:
 
 - `long_tcga_gbm_mrna_expression.csv`
 - `long_tcga_gbm_copy_number.csv`
 
-These long-format files are used to populate:
+These long format files are used to populate:
 
 - `mrna_expression`
 - `copy_number`
@@ -34,7 +34,7 @@ The generated SQL file is:
 
 This file was too large to upload directly to GitHub, so it is stored externally and linked in the `sql/README.md` file.
 
-This script prepares insert statements for the final database tables, including:
+This script prepares insert statements for the final database tables:
 
 - `patient`
 - `cancer_type`
@@ -54,7 +54,7 @@ This script prepares insert statements for the final database tables, including:
 
 ### `06_neo4j_cypher_visualization.txt`
 
-This file contains the Neo4j/Cypher code used to load SQL-derived differentially expressed genes into Neo4j.
+This file contains the Neo4j/Cypher code used to load SQL gotten differentially expressed genes into Neo4j.
 
 The Neo4j graph represents:
 
