@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-This project builds a reproducible MySQL database using TCGA Glioblastoma Multiforme data from cBioPortal. The database integrates clinical patient data, clinical sample data, mutation data, mRNA expression, copy-number alteration data, RPPA protein expression data, and sequencing panel information. The goal of this project was to organize the original multi-file cancer genomics dataset into a cleaner relational database that can be queried across patients, samples, genes, mutations, expression values, copy-number values, and protein measurements.
+This project builds a reproducible MySQL database using TCGA Glioblastoma Multiforme data from cBioPortal. The database incorporates clinical patient data, clinical sample data, mutation data, mRNA expression, copy number alteration data, RPPA protein expression data, and sequencing panel information. The goal of this project was to organize the original multiple file cancer genomics dataset into a cleaner relational database that can be queried across patients, samples, genes, mutations, expression values, copy number values, and protein measurements.
 
 The project also includes a small Neo4j component. SQL was used to identify candidate differentially expressed genes between Classical and Proneural GBM samples, and those results were loaded into Neo4j so the relationship between genes and GBM subtype could be visualized as a graph.
 
@@ -47,7 +47,7 @@ The `data/` folder contains links to the raw and cleaned datasets used in this p
 Because several data files were too large to upload directly to GitHub, the actual raw and cleaned files are stored externally and linked through README files.
 
 - [`data/raw/`](data/raw/) contains the link to the raw TCGA GBM datasets.
-- [`data/cleaned/`](data/cleaned/) contains the link to the cleaned datasets and long-format files used for database loading.
+- [`data/cleaned/`](data/cleaned/) contains the link to the cleaned datasets and long format files used for database loading.
 
 ### `diagrams/`
 
@@ -66,7 +66,7 @@ The `docs/` folder contains the main project documentation.
 
 Files included:
 
-- `project_writeup.pdf`: full project write-up
+- `project_writeup.pdf`: full project write up
 - `data_dictionary.md`: table and column definitions
 - `script_execution_order.md`: order for running scripts and SQL files
 - `decisions_and_limitations.md`: major design decisions, assumptions, and limitations
@@ -85,7 +85,7 @@ This file was created from a SQL query that compared mean mRNA expression betwee
 
 ### `scripts/`
 
-The `scripts/` folder contains the Python and Neo4j/Cypher scripts used in the workflow.
+The `scripts/` folder contains the Python and Neo4j/Cypher scripts used in the project.
 
 Files included:
 
@@ -94,11 +94,11 @@ Files included:
 - [`06_neo4j_cypher_visualization.txt`](scripts/06_neo4j_cypher_visualization.txt)
 - [`README.md`](scripts/README.md)
 
-These scripts convert the matrix-style mRNA and CNA files into long format, generate the SQL population file, and load the differential expression results into Neo4j.
+These scripts convert the matrix style mRNA and CNA files into long format, generate the SQL population file, and load the differential expression results into Neo4j.
 
 ### `sql/`
 
-The `sql/` folder contains the SQL and Cypher-related files used to create and support the database.
+The `sql/` folder contains the SQL and Cypher files used to create and support the database.
 
 Files included:
 
@@ -112,7 +112,9 @@ The large SQL population file, `04_populate_tcga_gbm_tables.sql`, was too large 
 
 The data used in this project come from the TCGA Glioblastoma Multiforme study available through cBioPortal.
 
-The project uses seven main data sources:
+Data Link: https://www.cbioportal.org/study/summary?id=gbm_tcga_pub2013
+
+The project uses seven main data files:
 
 - clinical patient data
 - clinical sample data
@@ -145,26 +147,26 @@ The final MySQL database contains 13 tables:
 - `protein_mutation`
 - `sequencing_panel`
 
-The database was designed to separate major biological and clinical entities into related tables. Patient-level information is stored separately from sample-level information, and molecular measurements are stored in separate expression, copy-number, mutation, and protein tables.
+The database was designed to separate biological and clinical entities into related tables. Patient level information is stored separately from sample level information, and molecular measurements are stored in separate expression, copy number, mutation, and protein tables.
 
-Bridge tables were used where the data had many-to-many relationships. For example, `mutation_sample` connects mutations to samples, and `mutation_gene` connects mutations to genes.
+Bridge tables were used where the data had many to many relationships. For example, `mutation_sample` connects mutations to samples, and `mutation_gene` connects mutations to genes.
 
 ## MySQL Database Tables
 
 | Table | Description |
 |---|---|
-| `patient` | Stores patient-level identifiers and sex |
+| `patient` | Stores patient level identifiers and sex |
 | `cancer_type` | Stores cancer type and detailed cancer type information |
-| `sample` | Stores sample-level clinical and molecular subtype information |
+| `sample` | Stores sample level clinical and molecular subtype information |
 | `gene` | Stores gene identifiers and gene annotation fields |
-| `mutation` | Stores mutation-level information |
+| `mutation` | Stores mutation level information |
 | `mutation_sample` | Bridge table connecting mutations to samples |
 | `mutation_gene` | Bridge table connecting mutations to genes |
-| `mrna_expression` | Stores long-format mRNA expression values by sample and gene |
-| `copy_number` | Stores long-format copy-number values by sample and gene |
+| `mrna_expression` | Stores long format mRNA expression values by sample and gene |
+| `copy_number` | Stores long format copy number values by sample and gene |
 | `protein` | Stores protein identifiers and linked gene IDs |
 | `protein_quant` | Stores RPPA protein expression values by sample and protein |
-| `protein_mutation` | Connects protein records to mutations and stores protein-change annotations |
+| `protein_mutation` | Connects protein records to mutations and stores protein change annotations |
 | `sequencing_panel` | Stores mutation and GISTIC/CNA panel information for each sample |
 
 ## How to Recreate the MySQL Database
@@ -213,7 +215,7 @@ Run:
 python "scripts/02_Converting Matrix to Long Format.py"
 ```
 
-This converts the cleaned mRNA expression and copy-number alteration matrix files into long format.
+This converts the cleaned mRNA expression and copy number alteration matrix files into long format.
 
 Expected outputs:
 
@@ -270,7 +272,7 @@ The expected total is 3,340,503 rows across 13 tables.
 
 ## Neo4j Component
 
-The Neo4j portion of this project uses SQL-derived differential expression results from the MySQL database.
+The Neo4j portion of this project uses SQL gotten differential expression results from the MySQL database.
 
 Each `Gene` node represents a candidate differentially expressed gene. Each `Subtype` node represents a GBM expression subtype, either `Classical` or `Proneural`. Each `HIGHER_IN` relationship connects a gene to the subtype where it had higher mean expression.
 
@@ -311,7 +313,7 @@ Diagram files are stored in the `diagrams/` folder:
 
 ## Large File Notes
 
-Several raw, cleaned, and generated SQL files exceed GitHub upload limits. To keep the repository clean and usable, large files are stored externally through linked Google Drive/Google Doc resources.
+Several raw, cleaned, and generated SQL files exceed GitHub upload limits. To keep the repository clean and usable, large files are stored externally through linked Google Doc resources.
 
 The repository still includes:
 
@@ -327,9 +329,9 @@ This structure keeps the project reproducible without making the GitHub reposito
 
 ## Use of AI Assistance
 
-ChatGPT was used as a support tool during parts of the dataset cleaning, database design, SQL generation, and documentation process. All final decisions about the database structure, cleaned files, SQL scripts, and project documentation were reviewed and implemented as part of this project.
+ChatGPT was used as a tool during parts of the dataset cleaning and SQL generation.
 
-A link to the ChatGPT conversation used during development is included in `docs/project_writeup.pdf`.
+Links to the ChatGPT conversations are included in `docs/project_writeup.pdf`.
 
 ## Project Status
 
