@@ -1,6 +1,6 @@
 # SQL Files
 
-This folder contains the SQL-related files used for the TCGA Glioblastoma database project. These files are used to create the MySQL schema, populate the database, document the finished database export, and support the Neo4j component of the project.
+This folder contains the SQL files used for the TCGA Glioblastoma database project. These files are used to create the MySQL schema, populate the database, document the finished database export, and support the Neo4j component of the project.
 
 ## Files included in this folder
 
@@ -26,7 +26,7 @@ The script creates the following tables:
 
 ### `05_neo4j_diff_exp.sql`
 
-This file contains the Neo4j/Cypher code used to load the SQL-derived differentially expressed genes into Neo4j. The graph represents genes as `Gene` nodes and GBM expression subtypes as `Subtype` nodes. Genes are connected to the subtype where they show higher mean expression using a `HIGHER_IN` relationship.
+This file contains the Neo4j/Cypher code used to load the SQL gotten differentially expressed genes into Neo4j. The graph represents genes as `Gene` nodes and GBM expression subtypes as `Subtype` nodes. Genes are connected to the subtype where they show higher mean expression using a `HIGHER_IN` relationship.
 
 ## Large SQL population file stored externally
 
@@ -36,7 +36,7 @@ The file is:
 
 - `04_populate_tcga_gbm_tables.sql`
 
-This script populates the MySQL database using the cleaned datasets and long-format mRNA/CNA files.
+This script populates the MySQL database using the cleaned datasets and long format mRNA/CNA files.
 
 Access the large population SQL file here:
 
@@ -50,7 +50,7 @@ The file is:
 
 - `database_dump.sql`
 
-This dump serves as an export of the finished populated database. It can be used as a backup or as an alternative way to recreate the completed MySQL database.
+This dump is an export of the finished populated database. It can be used as a backup or as an alternative way to recreate the completed MySQL database.
 
 Access the SQL dump here:
 
